@@ -10,10 +10,6 @@ using SpotifyToYouTube.MusicClients.Abstractions;
 
 public class Program
 {
-    private const string SpotifyClientId = "";
-    private const string SpotifyClientSecret = "";
-    private const string YouTubeApiKey = "";
-
     public static async Task Main(string[] args)
     {
         try
@@ -53,8 +49,8 @@ public class Program
     private static async Task<IMusicClient> CreateMusicClientAsync(MusicClient musicClient) =>
         musicClient switch
         {
-            MusicClient.Spotify => await Spotify.CreateAuthorizedClientAsync(SpotifyClientId, SpotifyClientSecret),
-            MusicClient.YouTube => YouTube.CreateAuthorizedClient(YouTubeApiKey)
+            MusicClient.Spotify => await Spotify.CreateAuthorizedClientAsync(Credentials.SpotifyClientId, Credentials.SpotifyClientSecret),
+            MusicClient.YouTube => YouTube.CreateAuthorizedClient(Credentials.YouTubeApiKey)
         };
 
     private static T SelectEnumOption<T>(string prompt, params T[] options)
